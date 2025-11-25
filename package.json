@@ -9,10 +9,10 @@
   "dependencies": {
     "express": "^4.17.1",
     "leanengine": "^3.0.0",
-    "leancloud-storage": "^3.0.0"
   },
   "engines": {
     "node": "16.x"
   }
 
 }
+
