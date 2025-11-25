@@ -4,10 +4,9 @@ const crypto = require('crypto');
 // ===========================================
 // 🔴 虎皮椒配置 (请去 https://www.xunhupay.com/ 获取)
 // ===========================================
-const XP_APPID = '201906175359';     // 例如 '12345'
-const XP_SECRET = '49491b29148a1552f85714f024306dfb'; // 例如 'xxxxx'
-// 您的前端网址 (支付成功后跳回这里)
-const DOMAIN = 'https://mypaper.top'; 
+const XP_APPID = process.env.XP_APPID;
+const XP_SECRET = process.env.XP_SECRET;
+const DOMAIN = process.env.DOMAIN;
 // 您的云引擎域名 (后面会教您怎么看) + 回调路径
 const NOTIFY_URL = 'https://scholar.avosapps.us/1.1/functions/hupiPayNotify'; 
 // ===========================================
@@ -90,4 +89,5 @@ AV.Cloud.define('hupiPayNotify', async (request) => {
       }
   }
   return 'success';
+
 });
