@@ -1,0 +1,16 @@
+{
+  "name": "scholar-radar-cloud",
+  "version": "1.0.0",
+  "description": "Scholar Radar Backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "leanengine": "^3.10.0",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "16.x"
+  }
+}
