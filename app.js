@@ -1,23 +1,30 @@
-'use strict';
-
-const express = require('express');
-const timeout = require('connect-timeout');
 const AV = require('leanengine');
-
-// 加载云函数定义
-require('./cloud');
-
+const express = require('express');
 const app = express();
 
-// 设置默认超时时间
-app.use(timeout('15s'));
-app.use(AV.express());
-
-app.get('/', function(req, res) {
-  res.send('Scholar Radar Backend is running!');
+AV.init({
+  appId: process.env.LEANCLOUD_APP_ID,
+  appKey: process.env.LEANCLOUD_APP_KEY,
+  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY
 });
 
-// 端口一定要从环境变量 process.env.LEANCLOUD_APP_PORT 中获取
-app.listen(process.env.LEANCLOUD_APP_PORT || 3000, function() {
-  console.log('Node app is running on port:', process.env.LEANCLOUD_APP_PORT || 3000);
+app.use(AV.express());
+
+// --- 重点：在这里加载你的代码 ---
+// 假设你上传的文件名叫 my_logic.js，这里就写 require('./my_logic.js');
+try {
+  require('./cloud.js'); 
+  console.log('User script loaded.');
+} catch (e) {
+  console.log('No user script found or script error:', e);
+}
+// -----------------------------
+
+app.get('/', function(req, res) {
+  res.send('LeanCloud App is Active!');
+});
+
+const PORT = parseInt(process.env.LEANCLOUD_APP_PORT || process.env.PORT || 3000);
+app.listen(PORT, function () {
+  console.log('App is running on port ' + PORT);
 });
